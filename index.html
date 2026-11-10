@@ -1,0 +1,1538 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100b12">
+<title>Cherry Cosmos | The Journey of Us</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #100b12;
+  --bg2: #1a111a;
+  --pink: #d99aae;
+  --pink2: #f0c7d3;
+  --gold: #d9b77a;
+  --cream: #f6e9df;
+  --muted: #b9a7b0;
+  --line: rgba(217,183,122,.28);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--sans);
+  overflow-x: hidden;
+}
+
+body.locked { overflow: hidden; }
+
+button { font: inherit; }
+
+a { color: inherit; text-decoration: none; }
+
+::selection {
+  background: var(--pink);
+  color: #160e14;
+}
+
+/* BACKGROUND */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 15% 20%, rgba(119,52,83,.16), transparent 40%),
+    radial-gradient(ellipse at 85% 70%, rgba(159,109,70,.10), transparent 40%);
+}
+
+#stars {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .55;
+}
+
+/* INTRO TICKET */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background:
+    linear-gradient(rgba(12,8,13,.84),rgba(12,8,13,.95)),
+    url("photos/01-childhood.jpg") center/cover;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.intro.leave {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.intro-content {
+  width: min(480px, 100%);
+  text-align: center;
+  animation: introRise 1.3s ease both;
+}
+
+.station-sign {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.ticket {
+  position: relative;
+  background: #e9d8bd;
+  color: #34252a;
+  padding: 34px 28px;
+  border-radius: 5px;
+  box-shadow: 0 25px 100px rgba(0,0,0,.55);
+  transform: rotate(-2deg);
+  overflow: hidden;
+}
+
+.ticket::before,
+.ticket::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: #160f17;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ticket::before { left: -13px; }
+.ticket::after { right: -13px; }
+
+.ticket-top {
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: #8e5d68;
+}
+
+.ticket h1 {
+  font: 600 clamp(40px, 10vw, 62px)/.95 var(--serif);
+  margin: 20px 0 12px;
+}
+
+.ticket-subtitle {
+  font: italic 19px var(--serif);
+  color: #805b64;
+}
+
+.ticket-divider {
+  border-top: 1px dashed #a78c83;
+  margin: 25px 0 17px;
+}
+
+.ticket-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  text-align: left;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ticket-details strong {
+  display: block;
+  font-size: 13px;
+  margin-top: 5px;
+  color: #38252b;
+}
+
+.ticket-number {
+  margin-top: 22px;
+  font-size: 10px;
+  letter-spacing: 5px;
+}
+
+.start-btn {
+  margin-top: 35px;
+  padding: 15px 30px;
+  border: 1px solid var(--gold);
+  background: rgba(217,183,122,.09);
+  color: var(--cream);
+  border-radius: 40px;
+  letter-spacing: 3px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: .4s;
+}
+
+.start-btn:hover {
+  background: var(--gold);
+  color: #170e14;
+  box-shadow: 0 0 35px rgba(217,183,122,.25);
+  transform: translateY(-3px);
+}
+
+.intro-note {
+  color: #cbb9c1;
+  font-size: 11px;
+  margin-top: 20px;
+  letter-spacing: 1px;
+}
+
+@keyframes introRise {
+  from { opacity: 0; transform: translateY(35px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* NAVIGATION */
+
+.nav {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  width: 100%;
+  padding: 17px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(16,11,18,.78);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.brand {
+  font: 600 24px var(--serif);
+  color: var(--pink2);
+  letter-spacing: 1px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.music-toggle {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  padding: 9px 13px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+/* HERO */
+
+.hero {
+  min-height: 100svh;
+  padding: 130px 22px 90px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  position: relative;
+  background:
+    linear-gradient(rgba(16,11,18,.48),rgba(16,11,18,.94)),
+    url("photos/01-childhood.jpg") center/cover;
+}
+
+.hero-content {
+  max-width: 850px;
+  animation: heroIn 1.8s ease both;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 6px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.hero h2 {
+  font: 500 clamp(65px, 12vw, 125px)/.86 var(--serif);
+  color: var(--pink2);
+  margin: 30px 0;
+  text-shadow: 0 10px 50px rgba(0,0,0,.5);
+}
+
+.hero h2 span {
+  display: block;
+  font-style: italic;
+  color: var(--cream);
+}
+
+.hero-description {
+  max-width: 510px;
+  margin: auto;
+  color: #d4c3cb;
+  font-size: 14px;
+  line-height: 2;
+  font-weight: 300;
+}
+
+.hero-date {
+  margin-top: 35px;
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 4px;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 35px;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--muted);
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  50% { transform: translateY(-9px); }
+}
+
+/* JOURNEY INTRO */
+
+.journey-heading {
+  padding: 110px 20px 65px;
+  text-align: center;
+}
+
+.journey-heading h2 {
+  font: 500 clamp(45px, 8vw, 75px) var(--serif);
+  color: var(--pink2);
+  margin: 15px 0;
+}
+
+.journey-heading p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+/* TRAIN JOURNEY */
+
+.journey {
+  max-width: 1120px;
+  margin: auto;
+  padding: 20px 7% 100px;
+  position: relative;
+}
+
+.railway {
+  position: absolute;
+  left: 26px;
+  top: 0;
+  bottom: 0;
+  width: 34px;
+  pointer-events: none;
+}
+
+.rail-line {
+  position: absolute;
+  left: 13px;
+  width: 5px;
+  top: 0;
+  bottom: 0;
+  border-left: 2px solid #8a777d;
+  border-right: 2px solid #8a777d;
+  opacity: .7;
+}
+
+.sleeper {
+  position: absolute;
+  left: 0;
+  width: 34px;
+  height: 4px;
+  background: #77646b;
+  border-radius: 4px;
+  opacity: .7;
+}
+
+.train-marker {
+  position: absolute;
+  top: 0;
+  left: -12px;
+  font-size: 32px;
+  z-index: 5;
+  filter: drop-shadow(0 0 12px rgba(217,183,122,.55));
+  transform: rotate(90deg);
+  transition: top .15s linear;
+}
+
+.station {
+  position: relative;
+  margin: 0 0 105px 55px;
+  min-height: 340px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 45px;
+  opacity: 0;
+  transform: translateY(55px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.station.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.station:nth-of-type(even) .station-image {
+  order: 2;
+}
+
+.station:nth-of-type(even) .station-text {
+  order: 1;
+}
+
+.station-image {
+  position: relative;
+  height: 340px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(217,183,122,.3);
+  background: linear-gradient(145deg,#2a1824,#181019);
+}
+
+.station-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s ease, opacity .6s;
+}
+
+.station-image:hover img { transform: scale(1.07); }
+
+.station-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(0deg,rgba(10,5,10,.35),transparent 60%);
+}
+
+.station-text { padding: 15px 0; }
+
+.station-number {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.station-text h3 {
+  font: 500 clamp(38px, 5vw, 55px)/.98 var(--serif);
+  color: var(--pink2);
+  margin: 18px 0;
+}
+
+.station-text p {
+  color: #c7b5bf;
+  line-height: 2;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.station-date {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-top: 22px;
+  text-transform: uppercase;
+}
+
+.memory-tag {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 8px 13px;
+  border: 1px solid var(--line);
+  color: var(--pink);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* GALLERY */
+
+.gallery {
+  padding: 100px 7% 120px;
+  background: linear-gradient(180deg,transparent,rgba(81,40,62,.14),transparent);
+}
+
+.gallery-heading {
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.gallery-heading h2 {
+  font: 500 clamp(48px, 8vw, 80px) var(--serif);
+  color: var(--pink2);
+  margin: 15px 0;
+}
+
+.gallery-heading p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.gallery-grid {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 17px;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border: 1px solid rgba(217,183,122,.25);
+  border-radius: 5px;
+  overflow: hidden;
+  background: #21151e;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+
+.gallery-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .8s ease, filter .5s;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.12);
+  filter: brightness(.8);
+}
+
+.gallery-item::after {
+  content: "♥";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  color: white;
+  opacity: 0;
+  transition: opacity .4s;
+}
+
+.gallery-item:hover::after { opacity: 1; }
+
+/* FINAL LETTER */
+
+.final-section {
+  min-height: 90vh;
+  padding: 110px 22px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background:
+    radial-gradient(ellipse,rgba(133,62,94,.18),transparent 65%);
+}
+
+.letter {
+  width: min(690px,100%);
+  padding: clamp(28px,6vw,65px);
+  border: 1px solid rgba(217,183,122,.28);
+  background: rgba(33,19,31,.55);
+  box-shadow: 0 30px 100px rgba(0,0,0,.2);
+  position: relative;
+}
+
+.letter::before {
+  content: "✦";
+  color: var(--gold);
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg);
+  padding: 0 15px;
+}
+
+.letter h2 {
+  font: 500 clamp(48px,8vw,75px) var(--serif);
+  color: var(--pink2);
+  margin: 20px 0 30px;
+}
+
+.letter p {
+  color: #d2c0c9;
+  line-height: 2.15;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 15px 0;
+}
+
+.signature {
+  margin-top: 40px;
+  font: italic 32px var(--serif);
+  color: var(--gold);
+}
+
+.final-words {
+  font: italic clamp(24px,5vw,42px) var(--serif);
+  color: var(--pink2);
+  margin-top: 55px;
+}
+
+/* LIGHTBOX */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8,5,10,.96);
+  padding: 25px;
+}
+
+.lightbox.active { display: flex; }
+
+.lightbox img {
+  max-width: 92%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 5px;
+  animation: zoomIn .4s ease;
+}
+
+.lightbox-close {
+  position: absolute;
+  right: 25px;
+  top: 20px;
+  color: white;
+  background: none;
+  border: 0;
+  font-size: 38px;
+  cursor: pointer;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(.88); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* FOOTER */
+
+footer {
+  padding: 35px 20px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  text-align: center;
+  color: #9d8993;
+  font-size: 10px;
+  letter-spacing: 2px;
+  line-height: 2;
+}
+
+footer span { color: var(--pink); }
+
+/* RESPONSIVE */
+
+@media(max-width: 760px) {
+  .nav { padding: 14px 5%; }
+  .brand { font-size: 21px; }
+  .nav-link { display: none; }
+
+  .hero { min-height: 90svh; }
+
+  .journey { padding-left: 15px; padding-right: 15px; }
+
+  .railway {
+    left: 4px;
+    opacity: .5;
+  }
+
+  .station {
+    margin-left: 39px;
+    margin-bottom: 75px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .station:nth-of-type(even) .station-image,
+  .station:nth-of-type(even) .station-text {
+    order: initial;
+  }
+
+  .station-image { height: 300px; }
+
+  .station-text h3 { font-size: 43px; }
+
+  .gallery { padding: 75px 5%; }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2,1fr);
+    gap: 11px;
+  }
+
+  .gallery-heading { margin-bottom: 35px; }
+
+  .letter { padding: 35px 23px; }
+
+  .ticket { padding: 30px 20px; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body class="locked">
+
+<canvas id="stars"></canvas>
+
+<!-- INTRO TICKET -->
+
+<div class="intro" id="intro">
+  <div class="intro-content">
+    <div class="station-sign">A special journey awaits</div>
+
+    <div class="ticket">
+      <div class="ticket-top">CHERRY COSMOS RAILWAYS</div>
+
+      <h1>The Journey<br>of Us</h1>
+
+      <div class="ticket-subtitle">
+        Two strangers. One beautiful story.
+      </div>
+
+      <div class="ticket-divider"></div>
+
+      <div class="ticket-details">
+        <div>
+          FROM
+          <strong>Childhood</strong>
+        </div>
+
+        <div>
+          TO
+          <strong>Our Tomorrow</strong>
+        </div>
+
+        <div>
+          PASSENGERS
+          <strong>Two Hearts</strong>
+        </div>
+      </div>
+
+      <div class="ticket-divider"></div>
+
+      <div class="ticket-number">CC — 170325 — 150425</div>
+    </div>
+
+    <button class="start-btn" id="startJourney">
+      BOARD THE TRAIN &nbsp; ✦
+    </button>
+
+    <div class="intro-note">
+      Please take your seat. Our story is about to begin.
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+
+<header class="nav">
+  <a href="#home" class="brand">Cherry Cosmos ✦</a>
+
+  <div class="nav-right">
+    <a class="nav-link" href="#journey">The Journey</a>
+    <a class="nav-link" href="#gallery">Our Memories</a>
+    <button class="music-toggle" id="musicToggle">♫ MUSIC OFF</button>
+  </div>
+</header>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="eyebrow">A story written across time</div>
+
+    <h2>
+      The Journey
+      <span>of Us</span>
+    </h2>
+
+    <p class="hero-description">
+      Some journeys begin with a destination.
+      Ours began with a childhood memory,
+      a name we almost forgot,
+      and a connection that found its way back.
+    </p>
+
+    <div class="hero-date">
+      17 MARCH 2025 — AND BEYOND
+    </div>
+  </div>
+
+  <div class="scroll-cue">SCROLL TO BEGIN THE JOURNEY ↓</div>
+</section>
+
+<!-- JOURNEY INTRO -->
+
+<section class="journey-heading" id="journey">
+  <div class="eyebrow">Eight stations · One story</div>
+
+  <h2>Every Stop Has a Memory</h2>
+
+  <p>
+    The train is moving through time.<br>
+    And at every station, there is a little piece of us.
+  </p>
+</section>
+
+<!-- TRAIN AND STORY -->
+
+<main class="journey" id="story">
+
+  <div class="railway" aria-hidden="true">
+    <div class="rail-line"></div>
+    <div class="train-marker" id="trainMarker">🚂</div>
+  </div>
+
+  <!-- STATION 1 -->
+
+  <article class="station">
+    <div class="station-image">
+      <img src="photos/01-childhood.jpg"
+           alt="Childhood memory"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="station-text">
+      <div class="station-number">Station 01 · The Beginning</div>
+      <h3>A Little Glimpse of You</h3>
+
+      <p>
+        Sarada Sishu Mandir. Class 1.
+        Who knew that a little face from those
+        school days would become such an important
+        part of a story years later?
+      </p>
+
+      <p>
+        There was a song around that time.
+        There were innocent days, little memories
+        and a beginning neither of us could understand.
+      </p>
+
+      <div class="station-date">The childhood chapter</div>
+      <div class="memory-tag">The first glimpse</div>
+    </div>
+  </article>
+
+  <!-- STATION 2 -->
+
+  <article class="station">
+    <div class="station-image">
+      <img src="photos/02-buri-search.jpg"
+           alt="School days"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="station-text">
+      <div class="station-number">Station 02 · The Search</div>
+      <h3>The Girl Called Buri</h3>
+
+      <p>
+        Years passed. Class 7 arrived.
+        We met again in the match batch.
+        And then, one day, you left.
+      </p>
+
+      <p>
+        I did not even know your real name.
+        All I knew was one name — Buri.
+        I tried searching, but I couldn't find you.
+      </p>
+
+      <p>
+        Funny how someone can disappear from
+        everyday life but remain somewhere in memory.
+      </p>
+
+      <div class="station-date">Class 7 · The match batch</div>
+      <div class="memory-tag">A name without a face</div>
+    </div>
+  </article>
+
+  <!-- STATION 3 -->
+
+  <article class="station">
+    <div class="station-image">
+      <img src="photos/03-follow-request.jpg"
+           alt="The unexpected Instagram request"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="station-text">
+      <div class="station-number">Station 03 · An Unexpected Signal</div>
+      <h3>cherrycosmos</h3>
+
+      <p>
+        17 March 2025.
+        An Instagram notification appeared.
+        A girl named cherrycosmos sent a follow request.
+      </p>
+
+      <p>
+        I thought it might be a fake account.
+        But something about that little notification
+        would soon change the direction of this journey.
+      </p>
+
+      <div class="station-date">17 March 2025</div>
+      <div class="memory-tag">The unexpected request</div>
+    </div>
+  </article>
+
+  <!-- STATION 4 -->
+
+  <article class="station">
+    <div class="station-image">
+      <img src="photos/04-her-name.jpg"
+           alt="Swastika"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="station-text">
+      <div class="station-number">Station 04 · The Revelation</div>
+      <h3>And Then I Knew Your Name</h3>
+
+      <p>
+        24 March 2025.
+        You messaged me.
+        We started talking, slowly and naturally.
+      </p>
+
+      <p>
+        Then came the realisation.
+        The girl I once knew as Buri,
+        the childhood memory I could never quite find,
+        was you.
+      </p>
+
+      <p>
+        Swastika Dutta.
+        A name that would become part of my favourite story.
+      </p>
+
+      <div class="station-date">24 March 2025</div>
+      <div class="memory-tag">The name I remembered</div>
+    </div>
+  </article>
+
+  <!-- STATION 5 -->
+
+  <article class="station">
+    <div class="station-image">
+      <img src="photos/05-hard-times.jpg"
+           alt="A difficult chapter"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="station-text">
+      <div class="station-number">Station 05 · The Difficult Tracks</div>
+      <h3>Not Every Track Was Easy</h3>
+
+      <p>
+        We both had our own pasts.
+        We had been hurt before.
+        Trust was not easy, and neither was opening up.
+      </p>
+
+      <p>
+        There were misunderstandings,
+        complications, other people and moments
+        when the journey seemed uncertain.
+      </p>
+
+      <p>
+        Even this story had difficult tracks to cross.
+      </p>
+
+      <div class="station-date">The days that tested us</div>
+      <div class="memory-tag">The challenging chapter</div>
+    </div>
+  </article>
+
+  <!-- STATION 6 -->
+
+  <article class="station">
+    <div class="station-image">
+      <img src="photos/06-proposal.jpg"
+           alt="The proposal"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="station-text">
+      <div class="station-number">Station 06 · A New Beginning</div>
+      <h3>15 April 2025</h3>
+
+      <p>
+        After arguments, confusion and so many
+        complicated moments, something unexpected happened.
+      </p>
+
+      <p>
+        On 11 April, you had blocked me.
+        And just a few days later, after another
+        eventful chapter, you proposed.
+      </p>
+
+      <p>
+        15 April 2025.
+        The day our journey officially began.
+      </p>
+
+      <div class="station-date">15 April 2025</div>
+      <div class="memory-tag">The day we began</div>
+    </div>
+  </article>
+
+  <!-- STATION 7 -->
+
+  <article class="station">
+    <div class="station-image">
+      <img src="photos/07-festivals.jpg"
+           alt="Festival memories"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="station-text">
+      <div class="station-number">Station 07 · Our Celebrations</div>
+      <h3>Festivals, Smiles & Memories</h3>
+
+      <p>
+        Two Durga Pujas.
+        One Saraswati Puja.
+        Countless little moments that became memories.
+      </p>
+
+      <p>
+        Some memories were grand.
+        Some were ordinary.
+        But the ordinary ones became special
+        because they were part of our story.
+      </p>
+
+      <div class="station-date">The celebrations we shared</div>
+      <div class="memory-tag">Our favourite moments</div>
+    </div>
+  </article>
+
+  <!-- STATION 8 -->
+
+  <article class="station">
+    <div class="station-image">
+      <img src="photos/08-today.jpg"
+           alt="Today"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="station-text">
+      <div class="station-number">Station 08 · The Present</div>
+      <h3>And Here We Are</h3>
+
+      <p>
+        From a school memory to an unexpected
+        Instagram request.
+        From not knowing your name to knowing
+        so many little things about you.
+      </p>
+
+      <p>
+        We have come a long way.
+        There are still places to visit,
+        memories to make and chapters yet to write.
+      </p>
+
+      <div class="station-date">The journey continues</div>
+      <div class="memory-tag">Not the ending</div>
+    </div>
+  </article>
+
+</main>
+
+<!-- PHOTO GALLERY -->
+
+<section class="gallery" id="gallery">
+
+  <div class="gallery-heading">
+    <div class="eyebrow">A few frames from our story</div>
+
+    <h2>Our Little Universe</h2>
+
+    <p>
+      Eight photographs.
+      Countless memories.<br>
+      Every picture has a story of its own.
+    </p>
+  </div>
+
+  <div class="gallery-grid">
+
+    <div class="gallery-item">
+      <img src="our-photos/01-first-memory.jpg"
+           alt="Our first memory"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="gallery-item">
+      <img src="our-photos/02-first-selfie.jpg"
+           alt="Our first selfie"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="gallery-item">
+      <img src="our-photos/03-favourite-moment.jpg"
+           alt="Favourite moment"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="gallery-item">
+      <img src="our-photos/04-durga-puja.jpg"
+           alt="Durga Puja together"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="gallery-item">
+      <img src="our-photos/05-saraswati-puja.jpg"
+           alt="Saraswati Puja"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="gallery-item">
+      <img src="our-photos/06-together.jpg"
+           alt="Together"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="gallery-item">
+      <img src="our-photos/07-candid-moment.jpg"
+           alt="A candid moment"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="gallery-item">
+      <img src="our-photos/08-my-favourite.jpg"
+           alt="My favourite photograph"
+           onerror="this.style.display='none'">
+    </div>
+
+  </div>
+</section>
+
+<!-- FINAL LETTER -->
+
+<section class="final-section" id="letter">
+
+  <div class="letter">
+    <div class="eyebrow">The last page of this chapter</div>
+
+    <h2>Dear Swastika,</h2>
+
+    <p>
+      If someone had told me in Class 1 that a girl
+      I once saw at school would become such an
+      important part of my life, I probably
+      wouldn't have believed them.
+    </p>
+
+    <p>
+      I never imagined that I would search for
+      someone called Buri, lose that little memory
+      somewhere in time, and then find you again
+      through a simple Instagram notification.
+    </p>
+
+    <p>
+      Our story was never a perfectly straight railway line.
+      There were unexpected turns, difficult tracks,
+      delays and moments we didn't understand.
+    </p>
+
+    <p>
+      But look how far this journey has brought us.
+      I hope we keep collecting memories,
+      discovering new places and making ordinary
+      days feel special.
+    </p>
+
+    <p>
+      This website has eight stations and eight
+      little photographs. But it could never
+      contain every memory we have made.
+    </p>
+
+    <p>
+      So, this is not really a goodbye.
+      It is just a pause before the next chapter.
+    </p>
+
+    <div class="signature">With love,</div>
+
+    <div class="final-words">
+      Still writing our story. ♥
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  CHERRY COSMOS RAILWAYS<br>
+  <span>ONE JOURNEY · TWO HEARTS · COUNTLESS MEMORIES</span><br>
+  EST. 17 MARCH 2025
+</footer>
+
+<!-- IMAGE LIGHTBOX -->
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose"
+          aria-label="Close image">&times;</button>
+  <img id="lightboxImage" src="" alt="Expanded memory">
+</div>
+
+<!-- ONE MUSIC PLAYER, CHANGES TRACK PER STATION -->
+
+<audio id="chapterMusic" preload="none"></audio>
+
+<script>
+/* --------------------------------
+   STARFIELD
+-------------------------------- */
+
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+let stars = [];
+
+function resizeStars() {
+  canvas.width = window.innerWidth * devicePixelRatio;
+  canvas.height = window.innerHeight * devicePixelRatio;
+  ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+
+  stars = Array.from({length:100}, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    r: Math.random() * 1.5,
+    a: Math.random(),
+    speed: .002 + Math.random() * .008
+  }));
+}
+
+function drawStars() {
+  ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+
+  stars.forEach(s => {
+    s.a += s.speed;
+    const opacity = .25 + Math.abs(Math.sin(s.a)) * .65;
+
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle = `rgba(245,214,224,${opacity})`;
+    ctx.fill();
+  });
+
+  requestAnimationFrame(drawStars);
+}
+
+window.addEventListener("resize",resizeStars);
+resizeStars();
+drawStars();
+
+
+/* --------------------------------
+   START JOURNEY
+-------------------------------- */
+
+const intro = document.getElementById("intro");
+const startButton = document.getElementById("startJourney");
+
+startButton.addEventListener("click", () => {
+  intro.classList.add("leave");
+  document.body.classList.remove("locked");
+
+  setTimeout(() => {
+    intro.style.display = "none";
+  },1100);
+
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+
+/* --------------------------------
+   STATION REVEALS
+-------------------------------- */
+
+const stations = document.querySelectorAll(".station");
+const galleryItems = document.querySelectorAll(".gallery-item");
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: .13
+});
+
+stations.forEach(station => revealObserver.observe(station));
+galleryItems.forEach(item => revealObserver.observe(item));
+
+
+/* --------------------------------
+   TRAIN FOLLOWS SCROLL PROGRESS
+-------------------------------- */
+
+const story = document.getElementById("story");
+const trainMarker = document.getElementById("trainMarker");
+
+let ticking = false;
+
+function updateTrain() {
+  if (!story || !trainMarker) return;
+
+  const rect = story.getBoundingClientRect();
+  const scrollable = story.offsetHeight - window.innerHeight;
+
+  let progress = 0;
+
+  if (scrollable > 0) {
+    progress = Math.max(0,Math.min(1,-rect.top/scrollable));
+  }
+
+  const maxTravel = Math.max(0,story.offsetHeight - 45);
+  trainMarker.style.top = (progress * maxTravel) + "px";
+}
+
+window.addEventListener("scroll",() => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      updateTrain();
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+window.addEventListener("resize",updateTrain);
+updateTrain();
+
+
+/* --------------------------------
+   CHAPTER MUSIC
+   Music starts only after the visitor
+   enables it, due to browser autoplay rules.
+-------------------------------- */
+
+const audio = document.getElementById("chapterMusic");
+const musicToggle = document.getElementById("musicToggle");
+
+const tracks = [
+  "music/01-childhood.mp3",
+  "music/02-buri-search.mp3",
+  "music/03-follow-request.mp3",
+  "music/04-her-name.mp3",
+  "music/05-hard-times.mp3",
+  "music/06-proposal.mp3",
+  "music/07-festivals.mp3",
+  "music/08-our-song.mp3"
+];
+
+let musicEnabled = false;
+let currentTrack = "";
+let fadeTimer = null;
+
+function fadeOutAndChange(newTrack) {
+  if (!musicEnabled || currentTrack === newTrack) return;
+
+  clearInterval(fadeTimer);
+
+  if (audio.paused || !audio.src) {
+    loadTrack(newTrack);
+    return;
+  }
+
+  fadeTimer = setInterval(() => {
+    if (audio.volume > .08) {
+      audio.volume = Math.max(0,audio.volume-.08);
+    } else {
+      clearInterval(fadeTimer);
+      audio.pause();
+      loadTrack(newTrack);
+    }
+  },70);
+}
+
+function loadTrack(track) {
+  currentTrack = track;
+  audio.src = track;
+  audio.volume = 0;
+
+  audio.play().then(() => {
+    let volume = 0;
+
+    const fadeIn = setInterval(() => {
+      volume = Math.min(.7,volume+.06);
+      audio.volume = volume;
+
+      if (volume >= .7) clearInterval(fadeIn);
+    },100);
+  }).catch(() => {
+    musicEnabled = false;
+    musicToggle.textContent = "♫ MUSIC OFF";
+  });
+}
+
+musicToggle.addEventListener("click",() => {
+  if (!musicEnabled) {
+    musicEnabled = true;
+    musicToggle.textContent = "♫ MUSIC ON";
+
+    const visibleStation = getCurrentStation();
+    loadTrack(tracks[visibleStation]);
+  } else {
+    musicEnabled = false;
+    audio.pause();
+    musicToggle.textContent = "♫ MUSIC OFF";
+  }
+});
+
+function getCurrentStation() {
+  let closestIndex = 0;
+  let closestDistance = Infinity;
+
+  stations.forEach((station,index) => {
+    const rect = station.getBoundingClientRect();
+    const distance = Math.abs(rect.top + rect.height/2 - window.innerHeight/2);
+
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestIndex = index;
+    }
+  });
+
+  return closestIndex;
+}
+
+const musicObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const index = Array.from(stations).indexOf(entry.target);
+
+      if (index >= 0) {
+        fadeOutAndChange(tracks[index]);
+      }
+    }
+  });
+}, {
+  threshold: .55
+});
+
+stations.forEach(station => musicObserver.observe(station));
+
+
+/* --------------------------------
+   PHOTO LIGHTBOX
+-------------------------------- */
+
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightboxImage");
+const closeButton = document.getElementById("lightboxClose");
+
+document.querySelectorAll(".gallery-item img").forEach(img => {
+  img.addEventListener("click",() => {
+    if (!img.naturalWidth) return;
+
+    lightboxImage.src = img.src;
+    lightbox.classList.add("active");
+    document.body.classList.add("locked");
+  });
+});
+
+function closeLightbox() {
+  lightbox.classList.remove("active");
+  document.body.classList.remove("locked");
+}
+
+closeButton.addEventListener("click",closeLightbox);
+
+lightbox.addEventListener("click",event => {
+  if (event.target === lightbox) closeLightbox();
+});
+
+document.addEventListener("keydown",event => {
+  if (event.key === "Escape") closeLightbox();
+});
+
+
+/* --------------------------------
+   IMAGE FALLBACK
+-------------------------------- */
+
+document.querySelectorAll("img").forEach(img => {
+  img.addEventListener("error",() => {
+    img.style.opacity = "0";
+  });
+});
+</script>
+
+</body>
+</html>
